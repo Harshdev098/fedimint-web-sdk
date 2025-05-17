@@ -10,7 +10,7 @@ import type {
 } from '../types'
 
 export class MintService {
-  constructor(private client: WorkerClient) {}
+  constructor(private client: WorkerClient) { }
 
   /** https://web.fedimint.org/core/FedimintWallet/MintService/redeemEcash */
   async redeemEcash(notes: string) {
@@ -37,8 +37,8 @@ export class MintService {
 
   subscribeReissueExternalNotes(
     operationId: string,
-    onSuccess: (state: ReissueExternalNotesState) => void = () => {},
-    onError: (error: string) => void = () => {},
+    onSuccess: (state: ReissueExternalNotesState) => void = () => { },
+    onError: (error: string) => void = () => { },
   ) {
     const unsubscribe = this.client.rpcStream<ReissueExternalNotesState>(
       'mint',
@@ -100,8 +100,8 @@ export class MintService {
 
   subscribeSpendNotes(
     operationId: string,
-    onSuccess: (state: SpendNotesState) => void = () => {},
-    onError: (error: string) => void = () => {},
+    onSuccess: (state: SpendNotesState) => void = () => { },
+    onError: (error: string) => void = () => { },
   ) {
     return this.client.rpcStream<SpendNotesState>(
       'mint',
@@ -116,5 +116,9 @@ export class MintService {
     return await this.client.rpcSingle('mint', 'await_spend_oob_refund', {
       operation_id: operationId,
     })
+  }
+
+  async getNotesByDenomination() {
+    return await this.client.rpcSingle('mint', 'note_counts_by_denomination', {});
   }
 }
