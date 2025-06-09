@@ -1,4 +1,4 @@
-import type { JSONValue } from '../types'
+import type { GetOperationResponse, JSONValue, lastSeenRequest } from '../types'
 import { WorkerClient } from '../worker'
 
 export class FederationService {
@@ -18,7 +18,21 @@ export class FederationService {
     })
   }
 
-  async listOperations() {
-    return await this.client.rpcSingle<JSONValue[]>('', 'list_operations', {})
+  async listOperations(
+    limit?: number,
+    last_seen?: lastSeenRequest,
+  ): Promise<JSONValue[]> {
+    return await this.client.rpcSingle<JSONValue[]>('', 'list_operations', {
+      limit: limit ?? null,
+      last_seen: last_seen ?? null,
+    })
+  }
+
+  async getOperation(operationId: string) {
+    return await this.client.rpcSingle<GetOperationResponse>(
+      '',
+      'get_operation',
+      { operation_id: operationId },
+    )
   }
 }

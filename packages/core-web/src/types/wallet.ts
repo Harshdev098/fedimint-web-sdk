@@ -65,6 +65,12 @@ type StreamError = {
   end: never
 }
 
+type GetOperationResponse = {
+  operation_module_kind: string
+  meta: JSONValue
+  outcome?: { time: number; outcome: JSONValue }
+} | null
+
 type StreamSuccess<T extends JSONValue> = {
   data: T
   error: never
@@ -113,6 +119,11 @@ type WalletSummary = {
   unconfirmed_change_utxos: TxOutputSummary[]
 }
 
+type lastSeenRequest = {
+  creation_time: { nanos_since_epoch: number; secs_since_epoch: number }
+  operation_id: string
+}
+
 /** Keys are powers of 2 */
 type NoteCountByDenomination = Record<number, number>
 
@@ -138,4 +149,6 @@ export {
   WalletSummary,
   TxOutputSummary,
   NoteCountByDenomination,
+  GetOperationResponse,
+  lastSeenRequest,
 }
