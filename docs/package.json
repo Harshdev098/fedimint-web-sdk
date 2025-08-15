@@ -11,6 +11,7 @@
     "@fedimint/core-web": "workspace:*",
     "@shikijs/vitepress-twoslash": "1.4.0",
     "vitepress": "1.1.4",
-    "vitepress-plugin-group-icons": "^1.5.5"
+    "vitepress-plugin-group-icons": "^1.5.5",
+    "vitepress-versioning-plugin": "^1.3.0"
   }
 }

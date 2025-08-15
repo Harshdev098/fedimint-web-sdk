@@ -11,7 +11,8 @@ import { FedimintWallet } from '@fedimint/core-web'
 const wallet = new FedimintWallet()
 wallet.open()
 
-const result = await wallet.lightning.payInvoiceSync( // [!code focus]
+const result = await wallet.lightning.payInvoiceSync(
+  // [!code focus]
   'lnbc...', // bolt11 invoice // [!code focus]
 ) // [!code focus]
 
@@ -37,19 +38,21 @@ import type { LnPayState } from '@fedimint/core-web'
 const wallet = new FedimintWallet()
 wallet.open()
 
-const { fee, payment_type } = await wallet.lightning.payInvoice( // [!code focus]
+const { fee, payment_type } = await wallet.lightning.payInvoice(
+  // [!code focus]
   'lnbc...', // bolt11 invoice // [!code focus]
 ) // [!code focus]
 
-// TODO: Simplify and explain this. 
+// TODO: Simplify and explain this.
 // Users should not have to check if the operation_id exists.
 
-let id = ''; 
+let id = ''
 if ('lightning' in payment_type) {
   id = payment_type.lightning // in flight lightning payment id
 }
 
-const unsubscribe = wallet.lightning.subscribeLnPay( // [!code focus]
+const unsubscribe = wallet.lightning.subscribeLnPay(
+  // [!code focus]
   id, // [!code focus]
   (state: LnPayState) => console.log(state), // State of the payment // [!code focus]
   (error: string) => console.error(error), // [!code focus]

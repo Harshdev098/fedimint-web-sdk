@@ -16,7 +16,8 @@ import type { LnReceiveState } from '@fedimint/core-web'
 const wallet = new FedimintWallet()
 wallet.open()
 
-const { operation_id, invoice } = await wallet.lightning.createInvoice( // [!code focus]
+const { operation_id, invoice } = await wallet.lightning.createInvoice(
+  // [!code focus]
   10_000, // msats // [!code focus]
   'This is an invoice description', // [!code focus]
 ) // [!code focus]
@@ -24,7 +25,8 @@ const { operation_id, invoice } = await wallet.lightning.createInvoice( // [!cod
 console.log(operation_id) // operation id for the invoice
 console.log(invoice) // bolt11 invoice
 
-const unsubscribe = wallet.lightning.subscribeLnReceive( // [!code focus]
+const unsubscribe = wallet.lightning.subscribeLnReceive(
+  // [!code focus]
   operation_id, // [!code focus]
   (state: LnReceiveState) => console.log(state), // [!code focus]
   (error: string) => console.error(error), // [!code focus]
